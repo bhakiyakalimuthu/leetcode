@@ -27,8 +27,8 @@ public class TwoSum {
         ts.ListNodePrintValue(ls1);
         ts.ListNodePrintValue(ls2);
 
-        ts.ListNodePrintValue(ts.Sum(ls1,ls2));
-
+//        ts.ListNodePrintValue(ts.Sum(ls1,ls2));
+        ts.ListNodePrintValue(ts.addTwoNumbers(ls1,ls2));
     }
 
     private ListNode Sum(ListNode l1, ListNode l2) {
@@ -56,7 +56,33 @@ public class TwoSum {
         }
         return head.next;
     }
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode sum = new ListNode(-1);
+        Integer v1=0,v2=0,c=0;
+        ListNode ptr = sum;
 
+        while (l1!=null || l2!=null){
+            if (l1!=null){
+                v1=l1.val;
+                l1=l1.next;
+            } else v1=0;
+            if (l2!=null){
+                v2= l2.val;
+                l2=l2.next;
+            } else v2=0;
+            Integer tmpVar = v1+v2+c;
+            Integer actualValue = tmpVar%10;
+            c = tmpVar/10;
+            ListNode tmpNode = new ListNode(actualValue);
+            ptr.next = tmpNode;
+            ptr = ptr.next;
+        }
+        if (c!=0){
+            ListNode ln = new ListNode(c);
+            ptr.next = ln;
+        }
+        return sum.next;
+    }
     private ListNode ListNodeConstructor(List<Integer> l) {
         ListNode ln = new ListNode(-1);
         ListNode ptr = ln;
